@@ -18,7 +18,7 @@ $n{'ref'} = 1;
 
 my %base = ('A'=>'R','R'=>'A');
 
-open LS,'/mnt/disk2_workspace/jiangyiqi/hCoV/code/GISAID20May11.period.stat.tsv';
+open LS,'GISAID20May11.period.stat.tsv';
 my $n_p = 0;
 my %n_in_p = ();
 while(<LS>){
