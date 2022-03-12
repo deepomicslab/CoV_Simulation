@@ -2,7 +2,7 @@ use Math::Random qw(random_poisson);
 use strict;
 
 my $LEN = 29903;
-#my ($out,$W,$RATE) = ("test_new7",2,0.000003);
+#my ($out,$W,$RATE) = ("test",2,0.000003);
 my ($out,$W,$RATE) = @ARGV;
 open OU,">$out";
 
