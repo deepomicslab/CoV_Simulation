@@ -8,8 +8,7 @@ Main scripts contains five steps:
   - with mixed mutations from variants
 - detect the links between SNP loci
 - find the max clique
-## Example
-You can simply run ```sh example.sh``` to generate a simulation based on GISAID20May11 period stat with r=1 
+
 
 
 ## Details
@@ -68,7 +67,7 @@ Columns reprent: lociA-lociB, number of combinations detected, number of sample 
 72-11441        4       RR:10889;AR:4;AA:2;RA:2;
 ```
 ### Detect the maximal clique
-```perl 4.find_clique.pl  [outfile].filter.count |sort -k4gr > [outfile].filter.count.clique```
+```perl 4.find_clique.pl  [outfile].filter.count |sort -k4gr > [outfile].filter.count.clique```   
 Clique represents a subnetwork composed of vertices and a set of edges. We traverse all edge to detect the clique with miximal vertex (SNP loci).
 
 
