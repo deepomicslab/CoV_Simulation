@@ -8,9 +8,12 @@ Main scripts contains five steps:
   - with mixed mutations from variants
 - detect the links between SNP loci
 - find the max clique
+## Example
+You can simply run ```sh example.sh``` to generate a simulation based on GISAID20May11 period stat with r=1 
 
 
-## Generate transmission route with mutations
+## Details
+### Generate transmission route with mutations
 ```perl 1.contruct_tree.pl [outfile] [w] [r]```  
 where r stands for the mutation rate, w stands for the average variant number.
 
@@ -39,16 +42,17 @@ Columns reprent: Number of variants in the parent sample, selected variant in th
 1       1       p3_sam108       3       1       p4_sam477       27746   R       A
 1       1       p3_sam108       3       2       p4_sam477       9906    R       A
 ```
-## Simulation of SNVs in assembly genomes
-### method 1: randomly select one variant
+### Simulation of SNVs in assembly genomes
+#### method 1: randomly select one variant
 ```perl 2.1.select_strain.pl [outfile] > [outfile].filter1 ```  
 
-### method 2: mixed variants
+#### method 2: mixed variants
 ```perl 2.2.mixed_strain.pl [outfile] > [outfile].filter2 ```  
 
 We hypothesized that the genomic sequence is an assembled mixture of genomes from all variants in the sample. We set a window of 100 nt and slide it across the entire genomic sequence. In each window, its SNVs come from a randomly selected strain.
 
-## Detect the edges between SNP loci
+### Detect the edges between SNP loci
+```perl 3.detect_links.pl [outfile].filter > [outfile].filter.count ```  
 We labelled the major allele of the SNP locus as R and the minor allele as A. Thus, it had four possible genetic combinations for every pair of two SNP loci: RR, RA, AR, and AA. We recognized each SNP locus as a vertex and created an edge between a locus pair only if all four genetic combinations existed in at least one assembly genome.  
 Columns reprent: lociA-lociB, number of combinations detected, number of sample with genotypes. Only loci pair satisfied the mentioned condition will output.
 ```
@@ -63,6 +67,8 @@ Columns reprent: lociA-lociB, number of combinations detected, number of sample 
 31-28709        4       RR:10845;AR:44;AA:6;RA:2;
 72-11441        4       RR:10889;AR:4;AA:2;RA:2;
 ```
+### Detect the maximal clique
+```perl 4.find_clique.pl  [outfile].filter.count |sort -k4gr > [outfile].filter.count.clique```
+Clique represents a subnetwork composed of vertices and a set of edges. We traverse all edge to detect the clique with miximal vertex (SNP loci).
 
-## Example
-### demo input stat file
+
